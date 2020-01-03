@@ -8,11 +8,12 @@ necessary functions accordingly
 
 import sys
 import getopt
+import lyrics
 
 
 def usage():
     print("Usage:")
-    print("songtiment.py [-s song] -a artist")
+    print("songtiment.py [-s \"song\"] -a \"artist\"")
 
 
 def main():
@@ -23,13 +24,13 @@ def main():
         return
 
     artist = None
-    song = None
+    title = None
     opts, args = getopt.getopt(arguments[1:], "s:a:")
     artist_found = False
 
     for o, a in opts:
         if o == "-s":
-            song = a
+            title = a
         elif o == "-a":
             artist_found = True
             artist = a
@@ -41,10 +42,16 @@ def main():
         usage()
         return
 
-    if song is not None:
-        print("Analyzing", song, "by", artist)
+    if title is not None:
+        print("Analyzing", title, "by", artist, "...\n")
+        song = lyrics.getSong(title, artist)
+        if song is None:
+            return
+        lyrics_received = lyrics.getLyrics(song)
+        lyrics.analyze(lyrics_received)
     else:
-        print("Analyzing music by", artist)
+        print("Analyzing music by", artist, "...\n")
+        print("Analysis of full discography not yet implemented.")
 
 
 main()
