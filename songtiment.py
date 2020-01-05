@@ -12,11 +12,19 @@ import lyrics
 
 
 def usage():
+    """
+    Simply prints the usage statement
+    """
     print("Usage:")
     print("songtiment.py [-s \"song\"] -a \"artist\"")
 
 
 def main():
+    """
+    songtiment.py [-s "song"] -a "artist"
+    Processes command line arguments using getopt
+    and calls functions accordingly to preform song analysis
+    """
     arguments = sys.argv
     argc = len(arguments)
     if argc == 1:
