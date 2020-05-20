@@ -1,5 +1,5 @@
 """
-File: lyrics.py
+File: basic_lyrics.py
 Language: python3
 Author: Ethan David Howes <edh5623@rit.edu>
 Purpose: Contains functions for searching, processing

@@ -8,7 +8,7 @@ necessary functions accordingly
 
 import sys
 import getopt
-import lyrics
+from Lyrics import basic_lyrics
 
 
 def usage():
@@ -52,11 +52,11 @@ def main():
 
     if title is not None:
         print("Analyzing", title, "by", artist, "...\n")
-        song = lyrics.getSong(title, artist)
+        song = basic_lyrics.getSong(title, artist)
         if song is None:
             return
-        lyrics_received = lyrics.getLyrics(song)
-        lyrics.analyze(lyrics_received)
+        lyrics_received = basic_lyrics.getLyrics(song)
+        basic_lyrics.analyze(lyrics_received)
     else:
         print("Analyzing music by", artist, "...\n")
         print("Analysis of full discography not yet implemented.")
