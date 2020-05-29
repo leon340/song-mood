@@ -9,6 +9,7 @@ necessary functions accordingly
 import sys
 import getopt
 from Lyrics import basic_lyrics
+from Lyrics import nn_lyrics
 
 
 def usage():
@@ -50,6 +51,8 @@ def main():
         usage()
         return
 
+    model = nn_lyrics.loadNN()
+
     if title is not None:
         print("Analyzing", title, "by", artist, "...\n")
         song = basic_lyrics.getSong(title, artist)
@@ -57,6 +60,7 @@ def main():
             return
         lyrics_received = basic_lyrics.getLyrics(song)
         basic_lyrics.analyze(lyrics_received)
+        nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=model)
     else:
         print("Analyzing music by", artist, "...\n")
         print("Analysis of full discography not yet implemented.")
