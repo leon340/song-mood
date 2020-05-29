@@ -14,6 +14,7 @@ Utilizing the IMDB Reviews dataset provided by tensorflow
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
+# Load the dataset
 dataset, info = tfds.load('imdb_reviews/subwords8k', with_info=True, as_supervised=True)
 
 train_data, test_data = dataset['train'], dataset['test']
@@ -29,6 +30,7 @@ train_data = train_data.shuffle(BUFFER_SIZE).padded_batch(BATCH_SIZE, padded_sha
 
 test_data = test_data.padded_batch(BATCH_SIZE, padded_shapes=padded_shapes)
 
+# Create the recurrent model
 model = tf.keras.Sequential([
     tf.keras.layers.Embedding(encoder.vocab_size, 64),
     tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
@@ -43,6 +45,7 @@ model.compile(loss='binary_crossentropy',
 history = model.fit(train_data, epochs=5, validation_data=test_data,
                     validation_steps=30)
 
+# Calculate model accuracy
 test_loss, test_acc = model.evaluate(test_data)
 
 print('Test Loss: {}'.format(test_loss))

@@ -51,7 +51,8 @@ def main():
         usage()
         return
 
-    model = nn_lyrics.loadNN()
+    # Load the machine learning based model
+    model = nn_lyrics.loadModel()
 
     if title is not None:
         print("Analyzing", title, "by", artist, "...\n")

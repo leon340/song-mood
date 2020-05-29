@@ -11,8 +11,10 @@ https://www.tensorflow.org/tutorials/text/text_classification_rnn
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
-import os
 
+# Load the data set to obtain an encoder to make predictions
+# TODO  This currently only works with the IMDB data set, need to modify
+# TODO  in the future if more data sets are used
 dataset, info = tfds.load('imdb_reviews/subwords8k', with_info=True, as_supervised=True)
 
 train_data, test_data = dataset['train'], dataset['test']
@@ -21,12 +23,25 @@ encoder = info.features['text'].encoder
 
 
 def add_padding(vec, size):
+    """
+    Pads an array to a given size with zeros
+    :param vec: The array/vector to be padded
+    :param size: Size to pad to
+    :return: The padded array
+    """
     zeros = [0] * (size - len(vec))
     vec.extend(zeros)
     return vec
 
 
 def predict(text, pad, model_to_predict):
+    """
+    Predicts the sentiment of text given a Keras model
+    :param text: Text to be analyzed
+    :param pad: Weather or not to pad the text before prediction
+    :param model_to_predict: Keras model used to predict the sentiment
+    :return: The sentiment of the text 0 to 1 (1 being happy 0 being sad)
+    """
     encoded_text = encoder.encode(text)
     if pad:
         encoded_text = add_padding(encoded_text, 64)
@@ -36,13 +51,17 @@ def predict(text, pad, model_to_predict):
     return predictions
 
 
-def loadNN():
-    cwd = os.getcwd()
-    print(cwd)
+def loadModel():
+    """
+    Loads the IMDB Keras model from a JSON, loads the weights into it
+    compiles it, and returns it
+    :return: the compiled and loaded model
+    """
     json_file = open('Lyrics/Models/modelIMDB.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = tf.keras.models.model_from_json(loaded_model_json)
+
     # load weights into new model
     loaded_model.load_weights("Lyrics/Models/modelIMDB.h5")
     print("Loaded model from disk")
