@@ -20,6 +20,32 @@ def usage():
     print("songtiment.py [-s \"song\"] -a \"artist\"")
 
 
+def analyze(title, artist):
+    """
+    Preforms analysis of a song given its title and artist
+    :param title: title of the song
+    :param artist: artist attributed to the song
+    """
+    # Load the machine learning based model
+    modelIMDB = nn_lyrics.loadModel("IMDB")
+    encoderIMDB = nn_lyrics.createEncoder("IMDB")
+    modelYelp = nn_lyrics.loadModel("Yelp")
+    encoderYelp = nn_lyrics.createEncoder("Yelp")
+
+    print("Analyzing", title, "by", artist, "...\n")
+    song = basic_lyrics.getSong(title, artist)
+    if song is None:
+        return
+
+    lyrics_received = basic_lyrics.getLyrics(song)
+    basic_lyrics.analyze(lyrics_received)
+
+    print("\nIMDB Model:")
+    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
+    print("\nYelp Model:")
+    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
+
+
 def main():
     """
     songtiment.py [-s "song"] -a "artist"
@@ -51,17 +77,8 @@ def main():
         usage()
         return
 
-    # Load the machine learning based model
-    model = nn_lyrics.loadModel()
-
     if title is not None:
-        print("Analyzing", title, "by", artist, "...\n")
-        song = basic_lyrics.getSong(title, artist)
-        if song is None:
-            return
-        lyrics_received = basic_lyrics.getLyrics(song)
-        basic_lyrics.analyze(lyrics_received)
-        nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=model)
+        analyze(title, artist)
     else:
         print("Analyzing music by", artist, "...\n")
         print("Analysis of full discography not yet implemented.")

@@ -33,7 +33,8 @@ def getSong(title, artist):
         print("'" + title + "' by", artist, "not found.")
         return None
     print("'" + song.title + "' by", song.artist)
-    print("Album:", "'" + song.album + "'")
+    if song.album is not None:
+        print("Album:", "'" + song.album + "'")
     return song
 
 

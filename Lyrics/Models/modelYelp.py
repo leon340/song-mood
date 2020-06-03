@@ -8,14 +8,14 @@ model to preform sentiment analysis on lyrics
 Model based on the TensorFlow text classification tutorial:
 https://www.tensorflow.org/tutorials/text/text_classification_rnn
 
-Utilizing the IMDB Reviews data set provided by tensorflow
+Utilizing the Yelp polarity reviews data set provided by tensorflow
 """
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
 # Load the data set
-dataset, info = tfds.load('imdb_reviews/subwords8k', with_info=True, as_supervised=True)
+dataset, info = tfds.load('yelp_polarity_reviews/subwords8k', with_info=True, as_supervised=True)
 
 train_data, test_data = dataset['train'], dataset['test']
 
@@ -53,9 +53,12 @@ print('Test Accuracy: {}'.format(test_acc))
 
 # Save model as JSON
 model_json = model.to_json()
-with open("modelIMDB.json", "w") as json_file:
+with open("modelYelp.json", "w") as json_file:
     json_file.write(model_json)
 
 # Save weights as h5
-model.save_weights("modelIMDB.h5")
+model.save_weights("modelYelp.h5")
 print("Saved model to disk")
+
+# Test Loss: 0.13942851126194
+# Test Accuracy: 0.9471579194068909
