@@ -21,7 +21,7 @@ Next, each word is reduced to its base form via
 lemmatization. Finally, the lyrics are detokenized
 back into a string so sentiment analysis can begin.
 
-**Sentiment Analysis**
+**Lexicon Based Sentiment Analysis**
 
 Using both NLTK's SentimentIntensityAnalyzer
 and textblob's sentiment polarity a sentiment
@@ -32,14 +32,29 @@ average gives a good middle ground between the two
 analyzers as sometimes one provides a better assessment
 of sentiment depending on the lyrics.
 
+**Machine Learning Based Sentiment Analysis**
+
+Two models were created using the Yelp polarity reviews data set 
+and the IMDB reviews data set from the provided data sets in Tensorflow.
+Both models used the same recurrent structure, see code for specific details.
+The "Yelp model" achieved 94.7% test accuracy after training while the
+"IMDB model" achieved 86% test accuracy. Despite the high accuracy achieved
+by the Yelp model and the moderately high accuracy achieved by the IMDB model
+both were inconsistent in determining the sentiment of lyrics during manual
+testing. Perhaps these are not the correct data sets to use for this problem.
+Movie or restaurant reviews are quite different from song lyrics.
+A data set containing lyrics and their associated sentiment may be more appropriate
+and will be investigated.
+
+
 _Notes:_
 
 After testing a plethora of songs, lyrical analysis 
 is not always indicative of the general mood of the
 song. Though it gives a good baseline there are 
 other factors impacting the sentiment of the song.
-Factors such as key, loudness, and how 
-reliant the song is on its lyrics will be investigated.
+Factors such as tempo, key, loudness, and how 
+reliant the song is on its lyrics will be also investigated.
 
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
