@@ -60,3 +60,7 @@ reliant the song is on its lyrics will be also investigated.
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
 
 Guideline used for sentiment analysis: https://www.datacamp.com/community/tutorials/text-analytics-beginners-nltk
+
+Lyrics emotion sentences dataset: Ricardo Malheiro (2017). 
+“Emotion-based Analysis and Classification of Music Lyrics“. Doctoral 
+Program in Information Science and Technology. University of Coimbra.

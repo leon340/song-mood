@@ -13,9 +13,6 @@ import tensorflow_datasets as tfds
 import tensorflow as tf
 
 # Load the data set to obtain an encoder to make predictions
-# TODO  This currently only works with the IMDB data set, need to modify
-# TODO  in the future if more data sets are used
-
 
 def createEncoder(dataset):
     """
