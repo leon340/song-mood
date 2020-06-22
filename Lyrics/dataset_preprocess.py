@@ -46,16 +46,29 @@ def getData(type):
 
 # TODO: Using this tutorial https://www.tensorflow.org/tutorials/load_data/text
 
+
+def converter(text):
+    """
+    Converts the quartile label to an integer
+    :param text: quartile label (Q1-4)
+    :return: The label as an integer tensor (1-4)
+    """
+    text = tf.strings.regex_replace(text, "Q", "")
+    return tf.strings.to_number(text, out_type=tf.dtypes.int64)
+
+
 BUFFER_SIZE = 50
 BATCH_SIZE = 64
 TAKE_SIZE = 100
 
 train_lyrics = tf.data.TextLineDataset(DATADIR + "Dataset-" + "129" + "_Sentences_condensed.txt")
 train_labels = tf.data.TextLineDataset(DATADIR + "Dataset-" + "129" + "_Sentences-Classes.txt")
+train_labels = train_labels.map(lambda string: converter(string))
 train_dataset = tf.data.Dataset.zip((train_lyrics, train_labels))
 
 test_lyrics = tf.data.TextLineDataset(DATADIR + "Dataset-" + "239" + "_Sentences_condensed.txt")
 test_labels = tf.data.TextLineDataset(DATADIR + "Dataset-" + "239" + "_Sentences-Classes.txt")
+test_labels = test_labels.map(lambda string: converter(string))
 test_dataset = tf.data.Dataset.zip((test_lyrics, test_labels))
 
 # TODO: Don't forget to shuffle!

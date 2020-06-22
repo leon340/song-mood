@@ -39,8 +39,12 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(4, activation='softmax')  # Softmax for prob dist?
 ])
 
-model.compile(loss='binary_crossentropy',
-              optimizer=tf.keras.optimizers.Adam(1e-4),
+# model.compile(loss='binary_crossentropy',
+#               optimizer=tf.keras.optimizers.Adam(1e-4),
+#               metrics=['accuracy'])
+
+model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
 # Use test_data for validation data parameter in fit
