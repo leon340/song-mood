@@ -43,9 +43,17 @@ by the Yelp model and the moderately high accuracy achieved by the IMDB model
 both were inconsistent in determining the sentiment of lyrics during manual
 testing. Perhaps these are not the correct data sets to use for this problem.
 Movie or restaurant reviews are quite different from song lyrics.
-A data set containing lyrics and their associated sentiment may be more appropriate
-and will be investigated.
+A data set containing lyrics and their associated sentiment may be more appropriate.
 
+An attempt was made to create a model using the MER data set which contained lyrics 
+associated with one of 4 quadrants
+from the Russell emotion model:
+Q1: Happy (can be excited or pleased)
+Q2: Tense
+Q3: Melancholy
+Q4 Serene Joy (peaceful, relaxed). However, the model achieved very low
+accuracy as well as a consistent loss of nan. Many different solutions were attempted
+to fix these issues to no avail. This model should be revisited in the future.
 
 _Notes:_
 
@@ -56,11 +64,18 @@ other factors impacting the sentiment of the song.
 Factors such as tempo, key, loudness, and how 
 reliant the song is on its lyrics will be also investigated.
 
+The IMDB and Yelp models should be sufficient to continue research
+into the other factors impacting song sentiment however the MER model
+should be revisited to improve accuracy in the future.
+
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
 
 Guideline used for sentiment analysis: https://www.datacamp.com/community/tutorials/text-analytics-beginners-nltk
 
-Lyrics emotion sentences dataset: Ricardo Malheiro (2017). 
+MER dataset: Ricardo Malheiro (2017). 
 “Emotion-based Analysis and Classification of Music Lyrics“. Doctoral 
 Program in Information Science and Technology. University of Coimbra.
+
+TensorFlow Load Text/Text Classification tutorial:
+https://www.tensorflow.org/tutorials/load_data/text

@@ -11,84 +11,53 @@ Q1: Happy (can be excited or pleased)
 Q2: Tense
 Q3: Melancholy
 Q4 Serene Joy (peaceful, relaxed)
+
+Based on this tutorial https://www.tensorflow.org/tutorials/load_data/text
 """
-import random
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
-DATADIR = "../data sets/MER_lyrics_sentences_dataset-ED/"
-BUFFER_SIZE = 50
-BATCH_SIZE = 64
-TAKE_SIZE = 100
+DATADIR = "../../data sets/MER_lyrics_sentences_dataset-ED/"
+BUFFER_SIZE = 150
+BATCH_SIZE = 10
+TAKE_SIZE = 50
 encoder = None
 
-# TODO: Using this tutorial https://www.tensorflow.org/tutorials/load_data/text
-def getData():
 
-    train_lyrics = tf.data.TextLineDataset(DATADIR + "Dataset-" + "129" + "_Sentences_condensed.txt")
-    train_labels = tf.data.TextLineDataset(DATADIR + "Dataset-" + "129" + "_Sentences-Classes.txt")
+def getData():
+    """
+    Pulls the MER Lyrics Sentences Dataset and prepares it for
+    use in training a model
+    :return: training data, test data, and the size of the vocabulary
+    used for the embedding
+    """
+    train_lyrics = tf.data.TextLineDataset(DATADIR + "Dataset-129_Sentences_condensed.txt")
+    train_labels = tf.data.TextLineDataset(DATADIR + "Dataset-129_Sentences-Classes.txt")
     train_labels = train_labels.map(lambda string: converter(string))
     train_dataset = tf.data.Dataset.zip((train_lyrics, train_labels))
 
-    test_lyrics = tf.data.TextLineDataset(DATADIR + "Dataset-" + "239" + "_Sentences_condensed.txt")
-    test_labels = tf.data.TextLineDataset(DATADIR + "Dataset-" + "239" + "_Sentences-Classes.txt")
+    test_lyrics = tf.data.TextLineDataset(DATADIR + "Dataset-239_Sentences_condensed.txt")
+    test_labels = tf.data.TextLineDataset(DATADIR + "Dataset-239_Sentences-Classes.txt")
     test_labels = test_labels.map(lambda string: converter(string))
     test_dataset = tf.data.Dataset.zip((test_lyrics, test_labels))
 
-    print(train_dataset)
-    print(list(train_dataset.as_numpy_iterator()))
-    print("train: ", type(train_dataset))
-    print("size: ", len(list(train_dataset.as_numpy_iterator())))
-
-    print("================")
-
-    print(test_dataset)
-    print(list(test_dataset.as_numpy_iterator()))
-    print("test: ", type(test_dataset))
-    print("size: ", len(list(test_dataset.as_numpy_iterator())))
-
-    print("================")
-
     all_labeled_data = train_dataset.concatenate(test_dataset)
-    all_labeled_data = all_labeled_data.shuffle(BUFFER_SIZE, reshuffle_each_iteration=True)
-
-    print(all_labeled_data)
-    print(list(all_labeled_data.as_numpy_iterator()))
-    print("test: ", type(all_labeled_data))
-    print("size: ", len(list(all_labeled_data.as_numpy_iterator())))
-
-    print("================")
+    all_labeled_data = all_labeled_data.shuffle(BUFFER_SIZE, reshuffle_each_iteration=False)
 
     vocab_set, vocab_size = createVocab(all_labeled_data)
 
+    # Create the encoder using the vocabulary
     global encoder
     encoder = tfds.features.text.TokenTextEncoder(vocab_set)
 
-    example_text = next(iter(all_labeled_data))[0].numpy()
-    print(example_text)
-    encoded_example = encoder.encode(example_text)
-    print(encoded_example)
-
-    print("================")
-
+    # Encode all of the lyrics in the dataset
     all_encoded_data = all_labeled_data.map(encode_map)
-    print(all_encoded_data)
-
-    print("================")
 
     train_data = all_encoded_data.skip(TAKE_SIZE).shuffle(BUFFER_SIZE)
     train_data = train_data.padded_batch(BATCH_SIZE)
 
-    test_data = all_encoded_data.take(TAKE_SIZE)
+    test_data = all_encoded_data.take(TAKE_SIZE).shuffle(BUFFER_SIZE)
     test_data = test_data.padded_batch(BATCH_SIZE)
-
-    # TODO: This errors since the label is a string (Q1-4)
-    # TODO: Should change the label to just a number 1-4
-    print(test_data)
-    sample_text, sample_labels = next(iter(test_data))
-
-    print(sample_text[0])
-    print(sample_labels[0])
 
     vocab_size += 1  # Because padding introduces a new token
 
@@ -96,6 +65,11 @@ def getData():
 
 
 def createVocab(all_labeled_data):
+    """
+    Creates a vocabulary set for a given text dataset
+    :param all_labeled_data: text dataset
+    :return: vocabulary set and its size
+    """
     tokenizer = tfds.features.text.Tokenizer()
     vocab_set = set()
     for text, _ in all_labeled_data:
@@ -104,18 +78,28 @@ def createVocab(all_labeled_data):
 
     vocab_size = len(vocab_set)
 
-    print(vocab_size)
-    print(vocab_set)
-
     return vocab_set, vocab_size
 
 
 def encode(text, label):
+    """
+    Encodes text using the global encoder
+    :param text: text to be encoded
+    :param label: label associated with the text
+    :return: encoded text and label
+    """
     encoded_text = encoder.encode(text.numpy())
+
     return encoded_text, label
 
 
 def encode_map(text, label):
+    """
+    Map function used to encode text in a dataset
+    :param text: text to be encoded
+    :param label: label associated with the text
+    :return: encoded text and label
+    """
     encoded_text, label = tf.py_function(encode,
                                          inp=[text, label],
                                          Tout=(tf.int64, tf.int64))
@@ -132,7 +116,5 @@ def converter(text):
     :return: The label as an integer tensor (1-4)
     """
     text = tf.strings.regex_replace(text, "Q", "")
+
     return tf.strings.to_number(text, out_type=tf.dtypes.int64)
-
-
-getData()
