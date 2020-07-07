@@ -3,7 +3,7 @@ File: songtiment.py
 Language: python3
 Author: Ethan David Howes <edh5623@rit.edu>
 Purpose: Processes command line args and calls
-necessary functions accordingly
+necessary functions accordingly.
 """
 
 import sys
