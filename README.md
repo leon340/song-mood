@@ -68,6 +68,11 @@ The IMDB and Yelp models should be sufficient to continue research
 into the other factors impacting song sentiment however the MER model
 should be revisited to improve accuracy in the future.
 
+# Tempo Analysis
+
+**Overview**
+
+
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
 
