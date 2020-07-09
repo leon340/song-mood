@@ -7,6 +7,7 @@ and analyzing lyrics
 """
 
 import lyricsgenius as lg
+from secret import *
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -15,7 +16,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize.treebank import TreebankWordDetokenizer
 
 # API Guide https://github.com/johnwmillr/LyricsGenius
-genius = lg.Genius("RZ8Yj-QLkMTDtrke4uL3LfKFDrNrFR-XjGG4Ie5-m3s8SUhevqJE6nz3Ym9zxxON")
+genius = lg.Genius(GENIUS_KEY)
 genius.verbose = False  # Disable printing of status messages
 genius.remove_section_headers = True  # Remove section headers from lyrics
 
