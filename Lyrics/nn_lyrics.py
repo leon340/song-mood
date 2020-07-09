@@ -11,6 +11,7 @@ https://www.tensorflow.org/tutorials/text/text_classification_rnn
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
+import Lyrics.basic_lyrics as basic_lyrics
 
 # Load the data set to obtain an encoder to make predictions
 
@@ -47,7 +48,7 @@ def addPadding(vec, size):
     return vec
 
 
-def predict(text, pad, model_to_predict, encoder):
+def predict(text, pad, model_to_predict, encoder, prepro):
     """
     Predicts the sentiment of text given a Keras model
     :param text: Text to be analyzed
@@ -57,6 +58,8 @@ def predict(text, pad, model_to_predict, encoder):
     represented and used in the model
     :return: The sentiment of the text 0 to 1 (1 being happy 0 being sad)
     """
+    if prepro:
+        text = basic_lyrics.preProcess(text)
     encoded_text = encoder.encode(text)
     if pad:
         encoded_text = addPadding(encoded_text, 64)

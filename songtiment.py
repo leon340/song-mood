@@ -41,10 +41,13 @@ def analyze(title, artist):
     basic_lyrics.analyze(lyrics_received)
 
     print("\nIMDB Model:")
-    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
+    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB, prepro=False)
+    print("With preprocessing: ")
+    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB, prepro=True)
     print("\nYelp Model:")
-    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
-
+    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelYelp, encoder=encoderYelp, prepro=False)
+    print("With preprocessing: ")
+    nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelYelp, encoder=encoderYelp, prepro=True)
 
 def main():
     """
