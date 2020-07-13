@@ -10,6 +10,7 @@ import sys
 import getopt
 from Lyrics import basic_lyrics
 from Lyrics import nn_lyrics
+from Song_Stats import features
 
 
 def usage():
@@ -38,6 +39,11 @@ def analyze(title, artist):
         return
 
     lyrics_received = basic_lyrics.getLyrics(song)
+
+    # Get and print stats about the song
+    feature_vec = features.getTrackFeatures(title, artist)
+    features.printFeatures(feature_vec)
+
     basic_lyrics.analyze(lyrics_received)
 
     print("\nIMDB Model:")
