@@ -68,10 +68,17 @@ The IMDB and Yelp models should be sufficient to continue research
 into the other factors impacting song sentiment however the MER model
 should be revisited to improve accuracy in the future.
 
+# Final Sentiment Equation
+
+Something must tie together the various factors impacting song sentiment to be explored.
+Currently, an average of the lyrical and title sentiment is taken between the IMDB model,
+Yelp model, Text blob, and NLTK's SentimentIntensityAnalyzer to produce
+a final sentiment score from 0 to 1. This does not yet take into account
+the other factors contributing to a song's sentiment and must be expanded upon.
+
 # Tempo Analysis
 
 **Overview**
-
 
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html

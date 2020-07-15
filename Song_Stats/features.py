@@ -54,8 +54,8 @@ def getTrackID(title, artist):
     :param artist: Artist for the song
     :return: The song's track ID
     """
-    track_info = title + "+" + artist
-    track_info = track_info.replace(" ", "+")
+    track_info = title + " " + artist
+    # track_info = track_info.replace(" ", "+")
     results = sp.search(q=track_info, type='track')
     return results['tracks']['items'][0]['id']
 
@@ -86,3 +86,4 @@ def printFeatures(feature_vec):
     print("Key: {}".format(pitch_classes[key]))
     print("Mode: {}".format(mode_types[mode]))
     print("Average Loudness: {}db".format(loudness))
+

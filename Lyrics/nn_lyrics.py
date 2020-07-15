@@ -62,7 +62,6 @@ def predict(text, pad, model_to_predict, encoder):
         encoded_text = addPadding(encoded_text, 64)
     encoded_text = tf.cast(encoded_text, tf.float32)
     predictions = model_to_predict.predict(tf.expand_dims(encoded_text, 0))
-    print("\nModel prediction: ", predictions)
     return predictions
 
 

@@ -76,6 +76,7 @@ def preProcess(lyrics):
 
     return processed_lyrics
 
+
 def analyze(lyrics):
     """
     Runs a sentiment analysis of a given string and prints the result.
@@ -105,3 +106,4 @@ def analyze(lyrics):
         print("Mostly Positive")
     elif 0.6 < avg_sentiment <= 1:
         print("Positive")
+    return avg_sentiment
