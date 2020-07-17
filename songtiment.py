@@ -43,7 +43,7 @@ def analyze(title, artist):
 
     lyrics_received = basic_lyrics.getLyrics(song)
     print("")
-    lyric_weights.getWeightMap(lyrics_received)
+    print(lyric_weights.getWeightMap(lyrics_received))
 
     # # Get and print stats about the song
     # feature_vec = features.getTrackFeatures(title, artist)
