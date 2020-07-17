@@ -68,6 +68,8 @@ def analyze(title, artist):
 
     print("\nFinal Sentiment: ", final_sentiment/6)
 
+    # TODO: The above section is where a "formula" would go to calculate the final sentiment
+
 
 def main():
     """

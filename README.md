@@ -61,7 +61,7 @@ After testing a plethora of songs, lyrical analysis
 is not always indicative of the general mood of the
 song. Though it gives a good baseline there are 
 other factors impacting the sentiment of the song.
-Factors such as tempo, key, loudness, and how 
+Factors such as tempo, mode, loudness, and how 
 reliant the song is on its lyrics will be also investigated.
 
 The IMDB and Yelp models should be sufficient to continue research
