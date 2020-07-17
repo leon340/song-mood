@@ -10,8 +10,8 @@ import sys
 import getopt
 from Lyrics import basic_lyrics
 from Lyrics import nn_lyrics
+from Lyrics import lyric_weights
 from Song_Stats import features
-
 
 def usage():
     """
@@ -30,6 +30,7 @@ def analyze(title, artist):
     final_sentiment = 0
 
     # Load the machine learning based model
+    # TODO: Put these in an initialize function later
     modelIMDB = nn_lyrics.loadModel("IMDB")
     encoderIMDB = nn_lyrics.createEncoder("IMDB")
     modelYelp = nn_lyrics.loadModel("Yelp")
@@ -41,32 +42,34 @@ def analyze(title, artist):
         return
 
     lyrics_received = basic_lyrics.getLyrics(song)
+    print("")
+    lyric_weights.getWeightMap(lyrics_received)
 
-    # Get and print stats about the song
-    feature_vec = features.getTrackFeatures(title, artist)
-    features.printFeatures(feature_vec)
-
-    final_sentiment += ((basic_lyrics.analyze(lyrics_received) + 1)/2)  # using x+1/2 to convert to a 0-1 scale
-    print("Title Sentiment: ")
-    final_sentiment += ((basic_lyrics.analyze(title) + 1)/2)
-
-    print("\nIMDB Model:")
-    imdb_lyrics = nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
-    final_sentiment += imdb_lyrics
-    print("\nModel lyrics prediction: ", imdb_lyrics)
-    imdb_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
-    final_sentiment += imdb_title
-    print("Model title prediction: ", imdb_title)
-
-    print("\nYelp Model:")
-    yelp_lyrics = nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
-    final_sentiment += yelp_lyrics
-    print("\nModel lyrics prediction: ", yelp_lyrics)
-    yelp_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
-    final_sentiment += yelp_title
-    print("Model title prediction: ", yelp_title)
-
-    print("\nFinal Sentiment: ", final_sentiment/6)
+    # # Get and print stats about the song
+    # feature_vec = features.getTrackFeatures(title, artist)
+    # features.printFeatures(feature_vec)
+    #
+    # final_sentiment += ((basic_lyrics.analyze(lyrics_received) + 1)/2)  # using x+1/2 to convert to a 0-1 scale
+    # print("Title Sentiment: ")
+    # final_sentiment += ((basic_lyrics.analyze(title) + 1)/2)
+    #
+    # print("\nIMDB Model:")
+    # imdb_lyrics = nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
+    # final_sentiment += imdb_lyrics
+    # print("\nModel lyrics prediction: ", imdb_lyrics)
+    # imdb_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
+    # final_sentiment += imdb_title
+    # print("Model title prediction: ", imdb_title)
+    #
+    # print("\nYelp Model:")
+    # yelp_lyrics = nn_lyrics.predict(lyrics_received, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
+    # final_sentiment += yelp_lyrics
+    # print("\nModel lyrics prediction: ", yelp_lyrics)
+    # yelp_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
+    # final_sentiment += yelp_title
+    # print("Model title prediction: ", yelp_title)
+    #
+    # print("\nFinal Sentiment: ", final_sentiment/6)
 
     # TODO: The above section is where a "formula" would go to calculate the final sentiment
 
