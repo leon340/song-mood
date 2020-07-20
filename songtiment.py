@@ -42,13 +42,7 @@ def analyze(title, artist):
 
     lyrics_received = basic_lyrics.getLyrics(song)
     print("")
-    weight_map = lyric_weights.getWeightMap(lyrics_received) # Needed for line by line analysis
-
-    # TODO: Make the analyze functions for both the nn lyrics and basic lyrics
-    # TODO: take the weight map as a parameter and apply it
-    # TODO: Perhaps makes the a new function in nn_lyrics that analyzes a all the lyrics and another
-    # TODO: that does a line
-    # TODO: For basic_lyrics build the weight application right into the analyze function
+    weight_map = lyric_weights.getWeightMap(lyrics_received)  # Needed for line by line analysis
 
     # Get and print stats about the song
     feature_vec = features.getTrackFeatures(title, artist)
