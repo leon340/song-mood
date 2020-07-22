@@ -80,7 +80,7 @@ the other factors contributing to a song's sentiment and must be expanded upon.
 
 **Equation Outputs:** Scale of how happy or sad the song is
 
-# Tempo Analysis
+# Tempo and Loudness Analysis
 
 **Overview**
 
