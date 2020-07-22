@@ -76,6 +76,10 @@ Yelp model, Text blob, and NLTK's SentimentIntensityAnalyzer to produce
 a final sentiment score from 0 to 1. This does not yet take into account
 the other factors contributing to a song's sentiment and must be expanded upon.
 
+**Equation Inputs:** Mode, Lyric Sentiment, Title Sentiment, Loudness, Tempo
+
+**Equation Outputs:** Scale of how happy or sad the song is
+
 # Tempo Analysis
 
 **Overview**
@@ -84,6 +88,11 @@ the other factors contributing to a song's sentiment and must be expanded upon.
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
 
 Guideline used for sentiment analysis: https://www.datacamp.com/community/tutorials/text-analytics-beginners-nltk
+
+NLTK Vader: Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious 
+Rule-based Model for Sentiment Analysis of Social Media Text. 
+Eighth International Conference on Weblogs and Social Media (ICWSM-14). 
+Ann Arbor, MI, June 2014.
 
 MER dataset: Ricardo Malheiro (2017). 
 “Emotion-based Analysis and Classification of Music Lyrics“. Doctoral 
