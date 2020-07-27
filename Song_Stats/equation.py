@@ -44,7 +44,7 @@ def tempo(bpm):
     All tempo sad total:  213
     All tempo sad avg:  109.87290140845074
 
-    0.9 and 0.10 valences
+    0.10 and 0.90 valences
     All tempo happy total:  70
     All tempo happy avg:  126.98902857142858
     All tempo sad total:  82
@@ -52,10 +52,15 @@ def tempo(bpm):
 
     All tracks total:  1007
     All tracks avg:  119.32066236345577
+
+    0.0000300856076(1.08493613)^x
     :param bpm:
     :return:
     """
-    return None
+    bpm_valence = 0.0000300856076*1.08493613**bpm
+    if bpm_valence > 1:
+        return 1
+    return bpm_valence
 
 
 def loudness(dbs):
@@ -71,7 +76,7 @@ def loudness(dbs):
     All  loudness sad total:  213
     All  loudness tempo sad avg:  -15.483995305164322
 
-    0.9 and 0.10 valences
+    0.10 and 0.90 valences
     All  loudness happy total:  70
     All  loudness tempo happy avg:  -8.150214285714284
     All  loudness sad total:  82
@@ -82,4 +87,7 @@ def loudness(dbs):
     :param dbs:
     :return:
     """
-    return None
+    loudness_valence = 2.31657085 * 1.161360103 ** dbs
+    if loudness_valence > 1:
+        return 1
+    return loudness_valence
