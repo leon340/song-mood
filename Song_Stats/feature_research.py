@@ -56,6 +56,9 @@ all_tracks = top_playlist['tracks']['items'] + happy_playlist['tracks']['items']
              rock_playlist['tracks']['items'] + rnb_playlist['tracks']['items'] + metal_playlist['tracks']['items'] \
              + blues_playlist['tracks']['items'] + latin_playlist['tracks']['items']
 
+HAPPY_THRESHOLD = 0.75
+SAD_THRESHOLD = 0.25
+
 
 def avgAll(feature):
     """
@@ -87,7 +90,7 @@ def analysisHappy(feature):
         features = sp.audio_features(id)
         val = features[0]['valence']
         val = float(val)
-        if val >= 0.75:  # currently using valence of 0.75 as the 'happy' threshold
+        if val >= HAPPY_THRESHOLD:  # valence greater than or equal to what is considered happy valence
             total += 1
             tempo = features[0][feature]
             avg += float(tempo)
@@ -107,7 +110,7 @@ def analysisSad(feature):
         features = sp.audio_features(id)
         val = features[0]['valence']
         val = float(val)
-        if val <= 0.25:  # currently using valence of 0.75 as the 'sad' threshold
+        if val <= SAD_THRESHOLD:  # valence less than or equal to what is considered sad valence
             total += 1
             tempo = features[0][feature]
             avg += float(tempo)
