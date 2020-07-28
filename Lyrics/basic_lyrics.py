@@ -77,13 +77,16 @@ def preProcess(lyrics):
     return processed_lyrics
 
 
-def analyze(lyrics):
+def analyze(lyrics, print):
     """
-    Runs a sentiment analysis of a given string and prints the result.
+    Runs a sentiment analysis of a given string and optionally prints the result.
     Takes the average of two analyses, nltk's SentimentIntensityAnalyzer
     and textblob's sentiment polarity
     :param lyrics: the string (song lyrics in this case) to be
     analyzed for sentiment
+    :param print: boolean indicating if the result of the analysis should
+    be printed as well as returned
+    :return: sentiment of the lyrics (from -1 to 1)
     """
     lyrics = preProcess(lyrics)
 
@@ -94,16 +97,19 @@ def analyze(lyrics):
     blob_sent = blob.sentiment.polarity
 
     avg_sentiment = (sia_sent['compound'] + blob_sent) / 2
-    print("\nAverage Sentiment:", avg_sentiment)
 
-    if -1 <= avg_sentiment < -0.6:
-        print("Negative")
-    elif -0.6 <= avg_sentiment < -0.3:
-        print("Mostly Negative")
-    elif -0.3 <= avg_sentiment <= 0.3:
-        print("Neutral")
-    elif 0.3 < avg_sentiment <= 0.6:
-        print("Mostly Positive")
-    elif 0.6 < avg_sentiment <= 1:
-        print("Positive")
+    if print:
+        print("\nAverage Sentiment:", avg_sentiment)
+
+        if -1 <= avg_sentiment < -0.6:
+            print("Negative")
+        elif -0.6 <= avg_sentiment < -0.3:
+            print("Mostly Negative")
+        elif -0.3 <= avg_sentiment <= 0.3:
+            print("Neutral")
+        elif 0.3 < avg_sentiment <= 0.6:
+            print("Mostly Positive")
+        elif 0.6 < avg_sentiment <= 1:
+            print("Positive")
+
     return avg_sentiment

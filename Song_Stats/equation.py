@@ -17,7 +17,7 @@ and Audio Features. International Journal of Artificial Intelligence &amp; Appli
 doi:10.5121/ijaia.2015.6304
 
 Mode: 0.5
-Valence(Lyrics and Title): 1.0 - maybe split this 75-25?
+Valence(Lyrics and Title): 1.0
 Loudness: 0.7
 Tempo: 0.8
 
@@ -30,6 +30,7 @@ LYRIC_WEIGHT = 0.75
 TITLE_WEIGHT = 0.25
 LOUDNESS_WEIGHT = 0.7
 TEMPO_WEIGHT = 0.8
+TOTAL_WEIGHT = MODE_WEIGHT + TEXT_WEIGHT + LOUDNESS_WEIGHT + TEMPO_WEIGHT
 
 
 def sentiment(mode, lyric_sentiment, title_sentiment, loudness, tempo):
@@ -46,7 +47,7 @@ def sentiment(mode, lyric_sentiment, title_sentiment, loudness, tempo):
     final_sentiment = ((MODE_WEIGHT * mode) +
                        (TEXT_WEIGHT * textSentiment(lyric_sentiment, title_sentiment)) +
                        (LOUDNESS_WEIGHT * loudnessSentiment(loudness)) +
-                       (TEMPO_WEIGHT * tempoSentiment(tempo))) / 3
+                       (TEMPO_WEIGHT * tempoSentiment(tempo))) / TOTAL_WEIGHT
     return final_sentiment
 
 
@@ -112,6 +113,8 @@ def loudnessSentiment(dB):
 
     All tracks total:  1007
     All tracks avg  loudness :  -9.934176762661364
+
+    2.31657085(1.161360103)^x
     :param dB: average loudness of the song in dB
     :return: predicted sentiment of the song
     """
