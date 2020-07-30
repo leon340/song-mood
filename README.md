@@ -68,7 +68,21 @@ The IMDB and Yelp models should be sufficient to continue research
 into the other factors impacting song sentiment however the MER model
 should be revisited to improve accuracy in the future.
 
+# Tempo Analysis
+
+**Overview:**
+
+Predict the sentiment of a song based on its tempo.
+
+# Loudness Analysis 
+
+**Overview:**
+
+Predict the sentiment of a song based on its loudness.
+
 # Final Sentiment Equation
+
+**Overview:**
 
 Something must tie together the various factors impacting song sentiment to be explored.
 Currently, an average of the lyrical and title sentiment is taken between the IMDB model,
@@ -80,9 +94,7 @@ the other factors contributing to a song's sentiment and must be expanded upon.
 
 **Equation Outputs:** Scale of how happy or sad the song is
 
-# Tempo and Loudness Analysis
-
-**Overview**
+Reliance on lyrics still to be investigated
 
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
