@@ -107,10 +107,9 @@ Program in Information Science and Technology. University of Coimbra.
 TensorFlow Load Text/Text Classification tutorial:
 https://www.tensorflow.org/tutorials/load_data/text
 
-Python Library for Spotify API: https://github.com/plamere/spotipy
+Python library for Spotify API: https://github.com/plamere/spotipy
 
-Study used for weights in final equation: https://arxiv.org/ftp/arxiv/papers/1506/1506.05012.pdf
-
+Study used for weights in final equation: https://arxiv.org/ftp/arxiv/papers/1506/1506.05012.pdf             
 Jamdar, A., Abraham, J., Khanna, K., &amp; Dubey, R. (2015). Emotion Analysis of Songs Based on Lyrical 
 and Audio Features. International Journal of Artificial Intelligence &amp; Applications, 6(3), 35-50. 
 doi:10.5121/ijaia.2015.6304
