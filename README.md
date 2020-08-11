@@ -68,33 +68,27 @@ The IMDB and Yelp models should be sufficient to continue research
 into the other factors impacting song sentiment however the MER model
 should be revisited to improve accuracy in the future.
 
-# Tempo Analysis
+# Tempo and Loudness Analysis 
 
 **Overview:**
 
-Predict the sentiment of a song based on its tempo.
-
-# Loudness Analysis 
-
-**Overview:**
-
-Predict the sentiment of a song based on its loudness.
+Predict the sentiment of a song based on its loudness or tempo.
 
 # Final Sentiment Equation
 
 **Overview:**
 
 Something must tie together the various factors impacting song sentiment to be explored.
-Currently, an average of the lyrical and title sentiment is taken between the IMDB model,
-Yelp model, Text blob, and NLTK's SentimentIntensityAnalyzer to produce
-a final sentiment score from 0 to 1. This does not yet take into account
-the other factors contributing to a song's sentiment and must be expanded upon.
+An average of the lyrical and title sentiment between the IMDB model,
+Yelp model, Text blob, and NLTK's SentimentIntensityAnalyzer does not 
+take into account the other factors contributing to a song's sentiment 
+and must be expanded upon.
 
 **Equation Inputs:** Mode, Lyric Sentiment, Title Sentiment, Loudness, Tempo
 
-**Equation Outputs:** Scale of how happy or sad the song is
+**Equation Outputs:** Scale of how sad or happy the song is (0-1)
 
-Reliance on lyrics still to be investigated.
+
 
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
@@ -112,3 +106,13 @@ Program in Information Science and Technology. University of Coimbra.
 
 TensorFlow Load Text/Text Classification tutorial:
 https://www.tensorflow.org/tutorials/load_data/text
+
+Python Library for Spotify API: https://github.com/plamere/spotipy
+
+Study used for weights in final equation: https://arxiv.org/ftp/arxiv/papers/1506/1506.05012.pdf
+
+Jamdar, A., Abraham, J., Khanna, K., &amp; Dubey, R. (2015). Emotion Analysis of Songs Based on Lyrical 
+and Audio Features. International Journal of Artificial Intelligence &amp; Applications, 6(3), 35-50. 
+doi:10.5121/ijaia.2015.6304
+
+Regression calculator used: https://keisan.casio.com/exec/system/14059932387562
