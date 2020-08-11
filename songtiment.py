@@ -60,15 +60,19 @@ def analyze(title, artist):
     title_sentiment += ((basic_lyrics.analyze(title, print=False) + 1)/2)
 
     # IMDB Model prediction
-    imdb_lyrics = nn_lyrics.predict(lyrics_received, pad=True, model_to_predict=modelIMDB, encoder=encoderIMDB)
+    imdb_lyrics = nn_lyrics.predict(lyrics_received, pad=True, model_to_predict=modelIMDB,
+                                    encoder=encoderIMDB, prepro=True)
     lyric_sentiment += imdb_lyrics
-    imdb_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelIMDB, encoder=encoderIMDB)
+    imdb_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelIMDB,
+                                   encoder=encoderIMDB, prepro=False)  # Don't pre-process title since it is so short
     title_sentiment += imdb_title
 
     # Yelp Model Prediction
-    yelp_lyrics = nn_lyrics.predict(lyrics_received, pad=True, model_to_predict=modelYelp, encoder=encoderYelp)
+    yelp_lyrics = nn_lyrics.predict(lyrics_received, pad=True, model_to_predict=modelYelp,
+                                    encoder=encoderYelp, prepro=True)
     lyric_sentiment += yelp_lyrics
-    yelp_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelYelp, encoder=encoderYelp)
+    yelp_title = nn_lyrics.predict(title, pad=False, model_to_predict=modelYelp,
+                                   encoder=encoderYelp, prepro=False)
     title_sentiment += yelp_title
 
     lyric_sentiment = lyric_sentiment/3
