@@ -61,17 +61,50 @@ After testing a plethora of songs, lyrical analysis
 is not always indicative of the general mood of the
 song. Though it gives a good baseline there are 
 other factors impacting the sentiment of the song.
-Factors such as tempo, key, loudness, and how 
+Factors such as tempo, mode, loudness, and how 
 reliant the song is on its lyrics will be also investigated.
 
 The IMDB and Yelp models should be sufficient to continue research
 into the other factors impacting song sentiment however the MER model
 should be revisited to improve accuracy in the future.
 
+# Tempo Analysis
+
+**Overview:**
+
+Predict the sentiment of a song based on its tempo.
+
+# Loudness Analysis 
+
+**Overview:**
+
+Predict the sentiment of a song based on its loudness.
+
+# Final Sentiment Equation
+
+**Overview:**
+
+Something must tie together the various factors impacting song sentiment to be explored.
+Currently, an average of the lyrical and title sentiment is taken between the IMDB model,
+Yelp model, Text blob, and NLTK's SentimentIntensityAnalyzer to produce
+a final sentiment score from 0 to 1. This does not yet take into account
+the other factors contributing to a song's sentiment and must be expanded upon.
+
+**Equation Inputs:** Mode, Lyric Sentiment, Title Sentiment, Loudness, Tempo
+
+**Equation Outputs:** Scale of how happy or sad the song is
+
+Reliance on lyrics still to be investigated
+
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
 
 Guideline used for sentiment analysis: https://www.datacamp.com/community/tutorials/text-analytics-beginners-nltk
+
+NLTK Vader: Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious 
+Rule-based Model for Sentiment Analysis of Social Media Text. 
+Eighth International Conference on Weblogs and Social Media (ICWSM-14). 
+Ann Arbor, MI, June 2014.
 
 MER dataset: Ricardo Malheiro (2017). 
 “Emotion-based Analysis and Classification of Music Lyrics“. Doctoral 
