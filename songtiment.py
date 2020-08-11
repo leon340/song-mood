@@ -38,13 +38,14 @@ def analyze(title, artist):
     modelYelp = nn_lyrics.loadModel("Yelp")
     encoderYelp = nn_lyrics.createEncoder("Yelp")
 
+    # Get the lyrics of the song
     print("Analyzing", title, "by", artist, "...\n")
     song = basic_lyrics.getSong(title, artist)
     if song is None:
         return
-
     lyrics_received = basic_lyrics.getLyrics(song)
     print("")
+
     weight_map = lyric_weights.getWeightMap(lyrics_received)  # Needed for line by line analysis
 
     # Get and print stats about the song

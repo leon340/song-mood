@@ -55,7 +55,7 @@ def getTrackID(title, artist):
     :return: The song's track ID
     """
     track_info = title + " " + artist
-    # track_info = track_info.replace(" ", "+")
+    # track_info = track_info.replace(" ", "+") # Will sometimes result in better searches
     results = sp.search(q=track_info, type='track')
     return results['tracks']['items'][0]['id']
 
