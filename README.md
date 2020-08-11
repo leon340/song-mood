@@ -94,7 +94,7 @@ the other factors contributing to a song's sentiment and must be expanded upon.
 
 **Equation Outputs:** Scale of how happy or sad the song is
 
-Reliance on lyrics still to be investigated
+Reliance on lyrics still to be investigated.
 
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
