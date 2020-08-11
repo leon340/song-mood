@@ -3,7 +3,7 @@ File: songtiment.py
 Language: python3
 Author: Ethan David Howes <edh5623@rit.edu>
 Purpose: Processes command line args and calls
-necessary functions accordingly.
+necessary functions accordingly to complete the sentiment analysis
 """
 
 import sys
@@ -46,7 +46,7 @@ def analyze(title, artist):
     lyrics_received = basic_lyrics.getLyrics(song)
     print("")
 
-    weight_map = lyric_weights.getWeightMap(lyrics_received)  # Needed for line by line analysis
+    # weight_map = lyric_weights.getWeightMap(lyrics_received)  Needed for line by line analysis
 
     # Get and print stats about the song
     feature_vec = features.getTrackFeatures(title, artist)

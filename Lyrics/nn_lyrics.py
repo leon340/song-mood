@@ -64,7 +64,7 @@ def lineByLinePrediction(weight_map, pad, model_to_predict, encoder):
     print(weight_map)
     w_avg = 0
     for key in weight_map:
-        prediction = predict(key, pad, model_to_predict, encoder)
+        prediction = predict(key, pad, model_to_predict, encoder, prepro=True)
         print("Key: " + key + " Prediction: " + str(prediction) + " Weight: " + str(weight_map[key]))
         w_avg += prediction * weight_map[key]
     return w_avg
@@ -78,6 +78,7 @@ def predict(text, pad, model_to_predict, encoder, prepro):
     :param model_to_predict: Keras model used to predict the sentiment
     :param encoder: encoder used for the data set to allow words to be
     represented and used in the model
+    :param prepro: whether or not the text should be pre-processed before prediction
     :return: The sentiment of the text 0 to 1 (1 being happy 0 being sad)
     """
     if prepro:
@@ -95,7 +96,7 @@ def loadModel(name):
     Loads the IMDB Keras model from a JSON, loads the weights into it
     compiles it, and returns it
     :param name: name of the model to load
-    Only 'IMDB' and 'Yelp' are currently supported
+    Only the 'IMDB' and 'Yelp' models are currently supported
     :return: the compiled and loaded model
     """
     json_file = open('Lyrics/Models/model' + name + '.json', 'r')

@@ -4,17 +4,20 @@ Language: python3
 Author: Ethan David Howes <edh5623@rit.edu>
 Purpose: Provide functions to assign weights
 lines of lyrics based on the frequency of their occurrence
+
+Not in use currently but may be useful in the future
 """
 
 from difflib import SequenceMatcher
 
-# Attempt to add line to map
-# Go through map, if no line has similarity >= 0.8 then add the line to the map, initialize occurrence at 1
-# If similar line found, increase the occurrence by one
-# After the map has been finished divide each occurrence by the total number of lines to get a weight
-
 
 def getWeightMap(lyrics):
+    """
+    Creates a Python dictionary containing line, weight pairs
+    association each line in the lyrics with a weight (how often it occurs)
+    :param lyrics: lyrics to create the map from
+    :return: the Python dictionary weight map
+    """
     weight_map = dict()
 
     lines = getLines(lyrics)
@@ -27,6 +30,11 @@ def getWeightMap(lyrics):
 
 
 def getLines(lyric_string):
+    """
+    Turns the lyrics body of text into a list of lines from the lyrics
+    :param lyric_string: The string containing all the lyrics
+    :return: list of lines in the lyrics
+    """
     lines = lyric_string.split("\n")
     while "" in lines:
         lines.remove("")
@@ -34,6 +42,15 @@ def getLines(lyric_string):
 
 
 def addLine(line, map):
+    """
+    Adds a line to the weight map or if the line is already
+    in the map, updates the weight.
+    Accounts for similar lines using a sequence matcher so
+    that similar lines don't have separate entries and weights
+    :param line: line in the lyrics to add
+    :param map: weight map to add the line to
+    :return: the updated weight map
+    """
     for key in map:
         similarity = SequenceMatcher(None, line, key).ratio()
         if similarity >= 0.8:
