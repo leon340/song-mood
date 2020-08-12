@@ -93,14 +93,7 @@ certain valences in order to assess the average tempo and loudness of happy song
 analysis was conducted on the resulting (valence, average tempo) and (valence, average loudness) pairs. The two regression
 equations obtained from this analysis each provide estimates of the sentiment of the song given its tempo or average loudness.
 
-<div class="row">
-  <div class="column">
-    <img src="https://github.com/edh5623/Songtiment-Analysis/blob/master/Song_Stats/tempo_valence_relationship.jpg" alt="Tempo" style="width:50%">
-  </div>
-  <div class="column">
-    <img src="https://github.com/edh5623/Songtiment-Analysis/blob/master/Song_Stats/loudness_valence_relationship.jpg" alt="Loudness" style="width:50%">
-  </div>
-</div>
+<img src="https://github.com/edh5623/Songtiment-Analysis/blob/master/Song_Stats/tempo_valence_relationship.jpg" alt="Tempo" width="49%"> <img src="https://github.com/edh5623/Songtiment-Analysis/blob/master/Song_Stats/loudness_valence_relationship.jpg" alt="Loudness" width="49%">
 
 _Notes:_
 
