@@ -93,6 +93,14 @@ certain valences in order to assess the average tempo and loudness of happy song
 analysis was conducted on the resulting (valence, average tempo) and (valence, average loudness) pairs. The two regression
 equations obtained from this analysis each provide estimates of the sentiment of the song given its tempo or average loudness.
 
+<img src="https://github.com/edh5623/Songtiment-Analysis/blob/master/Song_Stats/tempo_valence_relationship.jpg" width="470"> <img src="https://github.com/edh5623/Songtiment-Analysis/blob/master/Song_Stats/loudness_valence_relationship.jpg" width="470">
+
+_Notes:_
+
+Both regression lines extend beyond valence values of 1.0, however, for this application, the valence will be capped at 1.0 to keep a
+consistent 0-1 sentiment scale. This means that though a tempo of 160 may be projected to have a valence of 13.0 by the regression equation
+it will be represented as a 1.0 valence when being used in the final equation.
+
 # Final Sentiment Equation
 
 **Overview**
@@ -105,7 +113,7 @@ and must be expanded upon.
 
 **Equation Inputs:** Mode, Lyric Sentiment, Title Sentiment, Loudness, Tempo
 
-**Equation Outputs:** Scale of how sad or happy the song is (0-1)
+**Equation Outputs:** The Final Sentiment, a measure of how sad or happy the song is (0-1)
 
 The equation is a weighted average of the sentiments predicted by each input:
 
@@ -116,10 +124,11 @@ Final Sentiment = ((Mode Weight * mode sentiment) +
                    (Tempo Weight * sentiment predicted by the tempo regression equation)) / Sum of the weights
 ```
 
-The mode of the song is extracted using Spotipy and is represented as a 1 for major and 0 for minor. The combined
-sentiment of the lyrics and title is calculated by another weighted average of their sentiments. This average weighs the 
-lyric sentiment by 0.75 and the title sentiment by 0.25. The loudness and tempo sentiments are taken from predictions by 
-the regression equations created in the tempo and loudness analysis.
+The mode of the song is extracted using Spotipy and is represented as a 1 for major and 0 for minor. A major mode is usually 
+associated with happier feelings while a minor often evokes a more somber mood. The combined sentiment of the lyrics and title 
+is calculated by another weighted average of their sentiments. This average weighs the lyric sentiment by 0.75 and the title 
+sentiment by 0.25. The loudness and tempo sentiments are taken from predictions by the regression equations created in the 
+tempo and loudness analysis.
 
 **Equation Weights**
 
