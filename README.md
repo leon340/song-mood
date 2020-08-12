@@ -1,5 +1,6 @@
 # Songtiment-Analysis
-Advanced sentiment analysis of music.
+Advanced sentiment analysis of music analyzing
+the sentiment of lyrics and acoustic features.
 
 # Lyrical Analysis
 
@@ -70,13 +71,31 @@ should be revisited to improve accuracy in the future.
 
 # Tempo and Loudness Analysis 
 
-**Overview:**
+**Overview**
 
-Predict the sentiment of a song based on its loudness or tempo.
+Attempt to predict the sentiment of a song based on its average loudness and tempo.
+
+**Data Set**
+
+In order to associate these measures with sentiment, a dataset was compiled in order
+to study the relationship between song sentiment and tempo and loudness. Using 
+Spotipy, a Python library for the Spotify API, a diverse dataset containing over
+1,000 Spotify tracks from multiple genres was complied. Each track has various 
+attributes including Spotify's assessment of the track's sentiment (valence), average loudness in dB,
+and tempo in BPM.
+
+**Data Analysis**
+
+The goal of this analysis was to find the average tempo/loudness of average songs, sad songs, and happy songs.
+The average tempo over all tracks in the dataset as well as the average loudness served as a middle ground for
+the sentiment prediction. Then, averages of the same measures were taken over tracks only above or below
+certain valences in order to assess the average tempo and loudness of happy songs and sad songs. A regression 
+analysis was conducted on the resulting (valence, average tempo) and (valence, average loudness) pairs. The two regression
+equations obtained from this analysis each provide estimates of the sentiment of the song given its tempo or average loudness.
 
 # Final Sentiment Equation
 
-**Overview:**
+**Overview**
 
 Something must tie together the various factors impacting song sentiment to be explored.
 An average of the lyrical and title sentiment between the IMDB model,
@@ -88,7 +107,32 @@ and must be expanded upon.
 
 **Equation Outputs:** Scale of how sad or happy the song is (0-1)
 
+The equation is a weighted average of the sentiments predicted by each input:
 
+```
+Final Sentiment = ((Mode Weight * mode sentiment) + 
+                   (Text Weight * combined sentiment of the lyrics and title) +
+                   (Loudness Weight * sentiment predicted by the loudness regression equation) + 
+                   (Tempo Weight * sentiment predicted by the tempo regression equation)) / Sum of the weights
+```
+
+The mode of the song is extracted using Spotipy and is represented as a 1 for major and 0 for minor. The combined
+sentiment of the lyrics and title is calculated by another weighted average of their sentiments. This average weighs the 
+lyric sentiment by 0.75 and the title sentiment by 0.25. The loudness and tempo sentiments are taken from predictions by 
+the regression equations created in the tempo and loudness analysis.
+
+**Equation Weights**
+
+The weights used in the final sentiment equation were taken from a study conducted in 2015 by Jamdar, 
+Abraham, Khanna, and Dubey which proposed a method to detect the emotion of music using lyrical and audio features 
+using a k-Nearest neighbors classifier. Jamdar et al. used weights for the features to better categorize the song 
+into an emotion. These weights worked well for this analysis in the final sentiment equation as well.
+
+_Notes:_
+
+Though this equation proved to be slightly more accurate in initial testing than a purely lyrical analysis, 
+the acoustic features of the song may vary widely depending on the genre of the song. This along with
+improved lyrical assessment will be investigated to increase the accuracy of this evolving system.
 
 # Resources
 Inspiration: https://kvsingh.github.io/lyrics-sentiment-analysis.html
@@ -109,9 +153,9 @@ https://www.tensorflow.org/tutorials/load_data/text
 
 Python library for Spotify API: https://github.com/plamere/spotipy
 
+Regression calculator used: https://keisan.casio.com/exec/system/14059932387562
+
 Study used for weights in final equation: https://arxiv.org/ftp/arxiv/papers/1506/1506.05012.pdf             
 Jamdar, A., Abraham, J., Khanna, K., &amp; Dubey, R. (2015). Emotion Analysis of Songs Based on Lyrical 
 and Audio Features. International Journal of Artificial Intelligence &amp; Applications, 6(3), 35-50. 
 doi:10.5121/ijaia.2015.6304
-
-Regression calculator used: https://keisan.casio.com/exec/system/14059932387562
