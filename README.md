@@ -89,7 +89,7 @@ and tempo in BPM.
 The goal of this analysis was to find the average tempo/loudness of average songs, sad songs, and happy songs.
 The average tempo over all tracks in the dataset as well as the average loudness served as a middle ground for
 the sentiment prediction. Then, averages of the same measures were taken over tracks only above or below
-certain valences in order to assess the average tempo and loudness of happy songs and sad songs. A regression 
+certain valences in order to assess the average tempo and loudness of happy and sad songs. A regression 
 analysis was conducted on the resulting (valence, average tempo) and (valence, average loudness) pairs. The two regression
 equations obtained from this analysis each provide estimates of the sentiment of the song given its tempo or average loudness.
 
@@ -127,14 +127,14 @@ Final Sentiment = ((Mode Weight * mode sentiment) +
 The mode of the song is extracted using Spotipy and is represented as a 1 for major and 0 for minor. A major mode is usually 
 associated with happier feelings while a minor often evokes a more somber mood. The combined sentiment of the lyrics and title 
 is calculated by another weighted average of their sentiments. This average weighs the lyric sentiment by 0.75 and the title 
-sentiment by 0.25. The loudness and tempo sentiments are taken from predictions by the regression equations created in the 
-tempo and loudness analysis.
+sentiment by 0.25. The loudness and tempo of the song are also extracted via Spotipy and used with the regression equations 
+created in the tempo and loudness analysis to produce their predictions of the song's sentiment.
 
 **Equation Weights**
 
 The weights used in the final sentiment equation were taken from a study conducted in 2015 by Jamdar, 
 Abraham, Khanna, and Dubey which proposed a method to detect the emotion of music using lyrical and audio features 
-using a k-Nearest neighbors classifier. Jamdar et al. used weights for the features to better categorize the song 
+with a k-Nearest neighbors classifier. Jamdar et al. used weights for the features to better categorize the song 
 into an emotion. These weights worked well for this analysis in the final sentiment equation as well.
 
 _Notes:_
